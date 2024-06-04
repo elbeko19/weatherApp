@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block context %}
+    <label for="search"><h1>Enter a city:</h1></label>
+    <form class="mb-5 text-center d-flex" method="POST">
+        {% csrf_token %}
+        <div class="control is-expanded">{{ form.name }}</div>
+        <div class="control">
+            <button class="button is-info" style="font-weight: bold; width: 100px;" type="submit">Add City</button>
+        </div>
+    </form>
+
+<div class="row">
+    <h1>Main Page</h1>
+    {% for i in weather_data %}
+    <div class="col-2 m-3">
+        <div class="card" style="text-transform: capitalize;">
+        <img src="https://openweathermap.org/img/w/{{i.icon}}.png" class="card-img-top" alt="icon">
+        <div class="card-body">
+            <h5 class="card-title">🏙 {{ i.city }} ({{ i.country }})</h5>
+            <p class="card-text">💬 {{ i.description }}<br>🌡 {{ i.temperature }} °C</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Wind: {{ i.wind }}</li>
+            <li class="list-group-item">Humidity: {{ i.humidity }}%</li>
+            <li class="list-group-item">Pressure: {{ i.pressure }}</li>
+        </ul>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+
+{% endblock %}
